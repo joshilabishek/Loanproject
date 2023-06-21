@@ -2,17 +2,9 @@ version: 2.1
 
 jobs:
   build:
-    docker:
-      - image: circleci/openjdk:11-jdk
+    environment:
+      PRIVATE_KEY: $PRIVATE_KEY
     steps:
-      - checkout
-      - run:
-          name: Print artifact version
-          command: |
-            # Construct the artifact filename using $CIRCLE_BUILD_NUM
-            ARTIFACT_FILE=myapp-$CIRCLE_BUILD_NUM.jar
-            # Extract the version number from the filename
-            ARTIFACT_VERSION=$(echo "$ARTIFACT_FILE" | sed 's/myapp-\(.*\)\.jar/\1/')
-            # Print the artifact version
-            echo "Artifact version: $ARTIFACT_VERSION"
+      - run: echo $PRIVATE_KEY
+      # Use the private key in your build steps
 
